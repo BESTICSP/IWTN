@@ -63,6 +63,6 @@ MIT license
 
 Email： zjy@besti.edu.cn
 
-Yaqi Liu1, Zixiao Xiang1, Biao Liu, Jianyi Zhang.Instance-aware Weather Translation Network with RoI restricted Transformer bottleneck 
+Yaqi Liu, Zixiao Xiang, Biao Liu, Jianyi Zhang.Instance-aware Weather Translation Network with RoI restricted Transformer bottleneck 
 
 北京电子科技学院CSP实验室
