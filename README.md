@@ -36,7 +36,7 @@ Clone this repo:
 
 
 ## datasets
-use *download_cyclegan_dataset.sh* to download *summer2winter* dataset  
+use `download_cyclegan_dataset.sh` to download *summer2winter* dataset  
 
 the INIT dataset is published on [here](https://zhiqiangshen.com/projects/INIT/index.html)  
 
