@@ -4,8 +4,9 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 from . import losses
-
-
+from . import tools 
+#from . import myloss
+#from . import yololoss
 class SCModel(BaseModel):
     """
     This class implements the unpaired image translation model with spatially correlative loss
@@ -32,7 +33,7 @@ class SCModel(BaseModel):
         parser.add_argument('--lambda_perceptual', type=float, default=0.0, help='weight for feature consistency loss')
         parser.add_argument('--lambda_style', type=float, default=0.0, help='weight for style loss')
         parser.add_argument('--lambda_identity', type=float, default=0.0, help='use identity mapping')
-        parser.add_argument('--lambda_gradient', type=float, default=0.0, help='weight for the gradient penalty')
+        parser.add_argument('--lambda_gradient', type=float, default=5.0, help='weight for the gradient penalty')
 
         return parser
 
@@ -43,6 +44,7 @@ class SCModel(BaseModel):
         """
         BaseModel.__init__(self, opt)
         # specify the training losses you want to print out
+        #self.loss_names = ['style', 'G_s', 'per', 'D_real', 'D_fake', 'G_GAN','dec']
         self.loss_names = ['style', 'G_s', 'per', 'D_real', 'D_fake', 'G_GAN']
         # specify the images you want to save/display
         self.visual_names = ['real_A', 'fake_B' , 'real_B']
@@ -76,6 +78,9 @@ class SCModel(BaseModel):
             self.criterionFeature = losses.PerceptualLoss().to(self.device)
             self.criterionSpatial = losses.SpatialCorrelativeLoss(opt.loss_mode, opt.patch_nums, opt.patch_size, opt.use_norm,
                                     opt.learned_attn, gpu_ids=self.gpu_ids, T=opt.T).to(self.device)
+            # my own loss
+            # 先在这里定义一下这个loss的类
+            #self.dectloss = myloss.DectLoss().to(self.device)
             self.normalization = losses.Normalization(self.device)
             # define the contrastive loss
             if opt.learned_attn:
@@ -125,11 +130,29 @@ class SCModel(BaseModel):
             self.aug_A = input['A_aug' if AtoB else 'B_aug'].to(self.device)
             self.aug_B = input['B_aug' if AtoB else 'A_aug'].to(self.device)
         self.image_paths = input['A_paths' if AtoB else 'B_paths']
-
+        #print("image path",self.image_paths)
+        anno_path = '/home/user/disk_3/xzx/dataset/sunny1.txt'
+        self.box_info = tools.getBoxInfo5(self.image_paths,anno_path) # able to get box info
+        #print('self box info shape\n',self.box_info.shape)
+        #device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+        #self.box_info = self.box_info.to(device)
+        # print("box info",self.box_info.device) # cuda1	
     def forward(self):
         """Run forward pass"""
         self.real = torch.cat((self.real_A, self.real_B), dim=0) if (self.opt.lambda_identity + self.opt.lambda_spatial_idt > 0) and self.opt.isTrain else self.real_A
+        #print('realA shape',self.real.shape)
+        #device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+        #f_real = torch.flatten(self.real)
+        #f_real = f_real.to(device)
+        #f_box = torch.flatten(self.box_info)
+        #f_box = f_box.to(device)
+        #print('f real is',f_real.device) # cuda 1
+        #print('f box is',f_box.device) # cuda 1
+        #temp = torch.cat((f_real,f_box))
+        #temp = temp.to(device)
+        #print('temp shape',temp.shape,'temp device',temp.device) # temp shape = 4*3*256*256 + 4*5 = 786452 temp device cuda 1
         self.fake, _ = self.netG(self.real)
+        #self.fake, _ = self.netG(temp)
         self.fake_B = self.fake[:self.real_A.size(0)]
         if (self.opt.lambda_identity + self.opt.lambda_spatial_idt > 0) and self.opt.isTrain:
             self.idt_B = self.fake[self.real_A.size(0):]
@@ -185,6 +208,7 @@ class SCModel(BaseModel):
         l_sptial = self.opt.lambda_spatial
         l_idt = self.opt.lambda_identity
         l_spatial_idt = self.opt.lambda_spatial_idt
+        l_dec = 0.0002
         # GAN loss
         self.loss_G_GAN = self.criterionGAN(self.netD(self.fake_B), True)
         # different structural loss
@@ -194,6 +218,11 @@ class SCModel(BaseModel):
         self.loss_style = self.criterionStyle(norm_real_B, norm_fake_B) * l_style if l_style > 0 else 0
         self.loss_per = self.criterionFeature(norm_real_A, norm_fake_B) * l_per if l_per > 0 else 0
         self.loss_G_s = self.Spatial_Loss(self.netPre, norm_real_A, norm_fake_B, None) * l_sptial if l_sptial > 0 else 0
+        #myloss.dectloss(self.real_A,self.real_B)
+        # 在这里调用自己的写的loss类i
+        #yololoss.dect(self.real_A) 
+        #elf.loss_dec = self.dectloss(self.real_A,self.fake_B) * l_dec
+        #print('loss dec',self.loss_dec) 
         # identity loss
         if l_spatial_idt > 0:
             norm_fake_idt_B = self.normalization((self.idt_B + 1) * 0.5)

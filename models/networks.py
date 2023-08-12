@@ -1,5 +1,5 @@
 from torch.optim import lr_scheduler
-from . import cyclegan_networks, stylegan_networks
+from . import cyclegan_networks, stylegan_networks,self_networks,multi_networks
 
 
 ##################################################################################
@@ -26,7 +26,11 @@ def define_G(input_nc, output_nc, ngf, netG, norm='batch', use_dropout=False, in
     norm_value = cyclegan_networks.get_norm_layer(norm)
 
     if netG == 'resnet_9blocks':
-        net = cyclegan_networks.ResnetGenerator(input_nc, output_nc, ngf, norm_value, use_dropout, n_blocks=9, no_antialias=no_antialias, no_antialias_up=no_antialias_up, opt=opt)
+        #net = cyclegan_networks.ResnetGenerator(input_nc, output_nc, ngf, norm_value, use_dropout, n_blocks=9, no_antialias=no_antialias, no_antialias_up=no_antialias_up, opt=opt)
+        # training on street dataset, use line 31
+        #net = multi_networks.ResnetGenerator(input_nc, output_nc, ngf, norm_value, use_dropout, n_blocks=9, no_antialias=no_antialias, no_antialias_up=no_antialias_up, opt=opt)
+        # training on summer2winter dataset , use line 33
+        net = self_networks.ResnetGenerator(input_nc, output_nc, ngf, norm_value, use_dropout, n_blocks=9, no_antialias=no_antialias, no_antialias_up=no_antialias_up, opt=opt)
     elif netG == 'stylegan2':
         net = stylegan_networks.StyleGAN2Generator(input_nc, output_nc, ngf, opt=opt)
     else:

@@ -1,0 +1,2 @@
+================ Training Loss (Sat Aug 12 04:08:47 2023) ================
+(epoch: 1, iters: 100, time: 0.145, data: 0.422) style: 0.000 G_s: 1.050 per: 0.000 D_real: 0.340 D_fake: 0.193 G_GAN: 0.284 
