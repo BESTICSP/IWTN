@@ -6,3 +6,5 @@ the INIT dataset is published on [here](https://zhiqiangshen.com/projects/INIT/i
 
 the Night2day dataset is on [kaggle](https://www.kaggle.com/datasets/raman77768/day-time-and-night-time-road-images)  
 
+# train
+use *scripts/train_x.sh* to train the model
