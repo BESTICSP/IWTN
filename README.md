@@ -32,7 +32,7 @@ performance in I2I translation within the weather domain.
 This code was tested with Pytorch 1.10.0 and Python 3.7
 
 Clone this repo:
-`git clone `  
+`git clone`  
 
 
 ## datasets
@@ -44,9 +44,8 @@ the Night2day dataset is on [kaggle](https://www.kaggle.com/datasets/raman77768/
 
 ## training
 use *scripts/train_x.sh* to train the model  
-```java
-sh scripts/train_x.sh
-```
+`sh scripts/train_x.sh`
+
 
 if you want to train on summer2winter dataset , make sure the path of dataset is right, no need to change any other files.  
 
