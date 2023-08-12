@@ -61,7 +61,7 @@ specifically modify line 137-155 in *sc_model.py*
 MIT license
 
 
-Email:jy@besti.edu.cn
+Email: zjy@besti.edu.cn
 
 Yaqi Liu1†, Zixiao Xiang1†, Biao Liu1, Jianyi Zhang.Instance-aware Weather Translation Network with RoI restricted Transformer bottleneck 
 
