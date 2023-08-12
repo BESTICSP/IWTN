@@ -7,4 +7,12 @@ the INIT dataset is published on [here](https://zhiqiangshen.com/projects/INIT/i
 the Night2day dataset is on [kaggle](https://www.kaggle.com/datasets/raman77768/day-time-and-night-time-road-images)  
 
 # train
-use *scripts/train_x.sh* to train the model
+use *scripts/train_x.sh* to train the model  
+
+if you want to train on summer2winter dataset , make sure the path of dataset is right, no need to change any other files.  
+
+  
+If the training data set is modified, please modify the corresponding content in *network.py* and *sc_model.py*
+specifically modify line 137-155 in *sc_model.py*
+
+if you want to train on summer2winter dataset , make sure the path of dataset is right, no need to change any other files.
