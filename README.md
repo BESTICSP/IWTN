@@ -44,7 +44,7 @@ the Night2day dataset is on [kaggle](https://www.kaggle.com/datasets/raman77768/
 
 ## training
 use *scripts/train_x.sh* to train the model  
-`sh scripts/train_x.sh`
+`sh scripts/train_x.sh` will make `checkpoints folder`
 
 
 if you want to train on summer2winter dataset , make sure the path of dataset is right, no need to change any other files.  
@@ -53,4 +53,9 @@ if you want to train on summer2winter dataset , make sure the path of dataset is
 If the training data set is modified, please modify the corresponding content in *network.py* and *sc_model.py*
 specifically modify line 137-155 in *sc_model.py*
 
+## Testing
+`sh scripts/test_fid.sh` to test model and will make `results folder`
+
+
+##
 
