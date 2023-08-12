@@ -44,6 +44,8 @@ the Night2day dataset is on [kaggle](https://www.kaggle.com/datasets/raman77768/
 
 ## Training
 use *scripts/train_x.sh* to train the model  
+
+
 `sh scripts/train_x.sh` and this command will make `checkpoints folder`
 
 
