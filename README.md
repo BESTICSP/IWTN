@@ -28,17 +28,25 @@ performance in I2I translation within the weather domain.
 |  ----  | ----  |
 |  9.1  | RTX TITAN |
 
+# Getting start
+This code was tested with Pytorch 1.10.0 and Python 3.7
+
+Clone this repo:
+`git clone `  
 
 
-# datasets
+## datasets
 use *download_cyclegan_dataset.sh* to download *summer2winter* dataset  
 
 the INIT dataset is published on [here](https://zhiqiangshen.com/projects/INIT/index.html)  
 
 the Night2day dataset is on [kaggle](https://www.kaggle.com/datasets/raman77768/day-time-and-night-time-road-images)  
 
-# train
+## training
 use *scripts/train_x.sh* to train the model  
+```java
+sh scripts/train_x.sh
+```
 
 if you want to train on summer2winter dataset , make sure the path of dataset is right, no need to change any other files.  
 
