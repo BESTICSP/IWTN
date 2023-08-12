@@ -1,4 +1,4 @@
-# IWTN Instance-aware Weather Translation Network with RoI restricted Transformer bottleneck  
+#Instance-aware Weather Translation Network with RoI Restricted Transformer Bottleneck
 Unpaired image-to-image translation finds extensive applications in domains such
 as art, design, and scientific simulations. A notable breakthrough in this field
 is CycleGAN, which focus on establishing one-to-one mappings between two
@@ -35,14 +35,14 @@ Clone this repo:
 `git clone git@github.com:BESTICSP/IWTN.git`  
 
 
-## datasets
+## Datasets
 use `download_cyclegan_dataset.sh` to download *summer2winter* dataset  
 
 the INIT dataset is published on [here](https://zhiqiangshen.com/projects/INIT/index.html)  
 
 the Night2day dataset is on [kaggle](https://www.kaggle.com/datasets/raman77768/day-time-and-night-time-road-images)  
 
-## training
+## Training
 use *scripts/train_x.sh* to train the model  
 `sh scripts/train_x.sh` and this command will make `checkpoints folder`
 
@@ -60,9 +60,10 @@ specifically modify line 137-155 in *sc_model.py*
 ##
 MIT license
 
+Programer: Zixiao Xiang
 
 Email： zjy@besti.edu.cn
 
-Yaqi Liu, Zixiao Xiang, Biao Liu, Jianyi Zhang.Instance-aware Weather Translation Network with RoI restricted Transformer bottleneck 
+Yaqi Liu, Zixiao Xiang, Biao Liu, Jianyi Zhang. Instance-aware Weather Translation Network with RoI Restricted Transformer Bottleneck
 
 北京电子科技学院CSP实验室
