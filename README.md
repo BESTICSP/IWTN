@@ -22,6 +22,14 @@ experiments on publicly available datasets to evaluate the performance of our pr
 posed method. The results demonstrate that our method achieves state-of-the-art
 performance in I2I translation within the weather domain.  
 
+# Experimental environment  
+
+|  CUDA   | GPU  |
+|  ----  | ----  |
+|  9.1  | RTX TITAN |
+
+
+
 # datasets
 use *download_cyclegan_dataset.sh* to download *summer2winter* dataset  
 
