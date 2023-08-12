@@ -32,7 +32,7 @@ performance in I2I translation within the weather domain.
 This code was tested with Pytorch 1.10.0 and Python 3.7
 
 Clone this repo:
-`git clone`  
+`git clone git@github.com:BESTICSP/IWTN.git`  
 
 
 ## datasets
